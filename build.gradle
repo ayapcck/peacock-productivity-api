@@ -1,30 +1,62 @@
-plugins {
-    id 'java'
+group 'org.peacock-productivity'
+version '1.0'
+
+buildscript {      // Configuration for building
+    repositories {
+        jcenter()      // Bintray's repository - a fast Maven Central mirror & more
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+    }
 }
 
+apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
 
-group 'org.peacock-productivity'
-version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
+mainClassName = 'com.gradle.helloWorld.HelloWorld'
+
+project.ext {
+    dropwizardVersion = '1.3.9'
+    configPath = "$project.projectDir/config/"
+}
+
+run {
+    args 'server', configPath + 'local.yml'
+}
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-}
+    compile "io.dropwizard:dropwizard-core:$dropwizardVersion"
+    compile "io.dropwizard:dropwizard-auth:$dropwizardVersion"
+    compile "io.dropwizard:dropwizard-migrations:$dropwizardVersion"
+    compile "io.dropwizard:dropwizard-forms:$dropwizardVersion"
+    compile "io.dropwizard:dropwizard-hibernate:$dropwizardVersion"
+    compile "org.hibernate:hibernate-entitymanager:5.2.18.Final"
+    compile 'com.google.cloud.sql:mysql-socket-factory:1.0.15'
+    runtime 'mysql:mysql-connector-java:5.1.48'
 
-mainClassName = 'com.gradle.helloWorld.HelloWorld'
+    testCompile "io.dropwizard:dropwizard-testing:$dropwizardVersion"
+    testCompile 'org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-grizzly2:2.24' // Grizzly Test Server specifically for @Auth injection
+    testCompile "junit:junit:4.12"
+    testCompile "org.mockito:mockito-core:3.0.0"
+}
 
 jar {
     manifest {
-        attributes "Main-Class": "com.gradle.helloWorld.HelloWorld"
+        attributes (
+                'Main-Class': mainClassName,
+                'Class-Path': '.')
     }
+}
 
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
+shadowJar {
+    mergeServiceFiles()
+    archiveName = "example.${extension}"
 }
