@@ -1,14 +1,12 @@
-package com.gradle.helloWorld;
+package com.peacockProductivity;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class HelloWorldTest {
 
     @Test
-    public void FizzBuzzNormalNumbers() {
+    public void HelloWorldGenericTest() {
         HelloWorld helloWorld = new HelloWorld();
         Assert.assertEquals("Hello World!", helloWorld.testThing());
     }

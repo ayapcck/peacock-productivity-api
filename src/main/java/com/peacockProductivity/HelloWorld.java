@@ -1,4 +1,4 @@
-package com.gradle.helloWorld;
+package com.peacockProductivity;
 
 public class HelloWorld {
 

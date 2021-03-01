@@ -16,7 +16,7 @@ apply plugin: 'application'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 
-mainClassName = 'com.gradle.helloWorld.HelloWorld'
+mainClassName = 'com.peacockProductivity.HelloWorld'
 
 project.ext {
     dropwizardVersion = '1.3.9'
