@@ -23,5 +23,5 @@
 hs_err_pid*
 
 # Misc
-./gradle
-./idea
+.gradle/
+.idea/
