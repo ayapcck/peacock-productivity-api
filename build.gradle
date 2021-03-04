@@ -16,7 +16,7 @@ apply plugin: 'application'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 
-mainClassName = 'com.peacockProductivity.HelloWorld'
+mainClassName = 'com.peacockProductivity.WebApplication'
 
 project.ext {
     dropwizardVersion = '1.3.9'
@@ -24,7 +24,7 @@ project.ext {
 }
 
 run {
-    args 'server', configPath + 'local.yml'
+    args 'server', configPath + 'local.yaml'
 }
 
 repositories {
