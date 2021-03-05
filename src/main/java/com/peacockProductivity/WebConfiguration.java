@@ -2,18 +2,34 @@ package com.peacockProductivity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
-import org.hibernate.validator.constraints.NotEmpty;
+import io.dropwizard.db.DataSourceFactory;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 public class WebConfiguration extends Configuration {
-    @NotEmpty
+    @Valid
+    @JsonProperty("database")
+    private DataSourceFactory dataSourceFactory;
+
+    @Valid
+    @JsonProperty
     private String version;
 
-    @JsonProperty
+    @NotNull
+    public DataSourceFactory getDataSourceFactory() {
+        return dataSourceFactory;
+    }
+
+    @NotNull
     public String getVersion() {
         return version;
     }
 
-    @JsonProperty
+    public void setDataSourceFactory(DataSourceFactory dataSourceFactory) {
+        this.dataSourceFactory = dataSourceFactory;
+    }
+
     public void setVersion(String version) {
         this.version = version;
     }
