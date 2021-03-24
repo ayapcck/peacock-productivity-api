@@ -51,12 +51,10 @@ public class User {
         this.profileImgSrc = profileImgSrc;
     }
 
-    @JsonIgnore
     public Role getRole() {
         return role;
     }
 
-    @JsonIgnore
     public void setRole(Role rid) {
         this.role = role;
     }

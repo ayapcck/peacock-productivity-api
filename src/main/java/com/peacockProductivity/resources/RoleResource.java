@@ -24,7 +24,7 @@ public class RoleResource {
     @Timed
     @Path("/list")
     @UnitOfWork
-    public List<Role> listUsers() {
+    public List<Role> listRoles() {
         return roleDAO.list();
     }
 
