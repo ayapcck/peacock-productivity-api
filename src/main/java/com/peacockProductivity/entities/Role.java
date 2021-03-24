@@ -1,15 +1,14 @@
 package com.peacockProductivity.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="users")
+@Table(name="roles")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class User {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,12 +19,9 @@ public class User {
     @Column(name="name")
     private String name;
 
-    @Column(name="profileImgSrc")
-    private String profileImgSrc;
-
-    @ManyToOne
-    @JoinColumn(name="rid_fk")
-    private Role role;
+    @NotNull
+    @Column(name="hasAdminAccess")
+    private boolean hasAdminAccess;
 
     public int getId() {
         return id;
@@ -43,21 +39,13 @@ public class User {
         this.name = name;
     }
 
-    public String getProfileImgSrc() {
-        return profileImgSrc;
+    public boolean getHasAdminAcces() {
+        return hasAdminAccess;
     }
 
-    public void setProfileImgSrc(String profileImgSrc) {
-        this.profileImgSrc = profileImgSrc;
+    public void setHasAdminAccess(boolean hasAdminAccess) {
+        this.hasAdminAccess = hasAdminAccess;
     }
 
-    @JsonIgnore
-    public Role getRole() {
-        return role;
-    }
 
-    @JsonIgnore
-    public void setRole(Role rid) {
-        this.role = role;
-    }
 }
